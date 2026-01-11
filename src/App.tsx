@@ -2,12 +2,17 @@ import './App.css'
 import { useEffect, useState } from 'react'
 import { fetchAnimieData } from './get_data';
 
+interface AnimieData {
+  image: string;
+  title: string;
+  description: string;
+}
 
 function App() {
 
-  const [data, setData] = useState<unknown>(null);
+  const [data, setData] = useState<AnimieData | null>(null);
   useEffect(() => {
-    const response = fetchAnimieData();
+    const response = fetchAnimieData() as Promise<AnimieData>;
     response.then((res) => {
       setData(res);
       console.log(res);
